@@ -1,5 +1,5 @@
 project(pawnc C)
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.10)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
@@ -54,10 +54,14 @@ if(MSVC)
   endif()
 endif()
 
-if(UNIX)
+if(UNIX AND NOT ANDROID)
   add_definitions(-DLINUX -DENABLE_BINRELOC -g)
   include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../linux)
   link_libraries(pthread)
+endif()
+if(ANDROID)
+  add_definitions(-DLINUX -DPAWN_CELL_SIZE=32)
+  include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../linux)
 endif()
 
 if(APPLE)
