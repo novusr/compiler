@@ -60,7 +60,7 @@ if(UNIX AND NOT ANDROID)
   link_libraries(pthread)
 endif()
 if(ANDROID)
-  add_definitions(-DLINUX -DPAWN_CELL_SIZE=32)
+  add_definitions(-DLINUX -DPAWN_CELL_SIZE=32 -DsNAMEMAX=63)
   include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../linux)
 endif()
 
